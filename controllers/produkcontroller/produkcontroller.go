@@ -78,3 +78,24 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 func Delete(w http.ResponseWriter, r *http.Request) {
 
 }
+
+func Detail(w http.ResponseWriter, r *http.Request) {
+
+	idString := r.URL.Query().Get("id")
+	id, err := strconv.Atoi(idString)
+	if err != nil {
+		panic(err)
+	}
+
+	produk := produkmodel.Detail(id)
+	data := map[string]any{
+		"produk": produk,
+	}
+
+	temp, err := template.ParseFiles("views/produk/detail.html")
+	if err != nil {
+		panic(err)
+	}
+
+	temp.Execute(w, data)
+}

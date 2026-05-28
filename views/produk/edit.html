@@ -41,27 +41,32 @@
     <div class="container mt-3">
       <div class="row d-flex justify-content-center">
         <div class="col-4">
-          <h1>Detail Product</h1>
+          <h1>Edit Product</h1>
           <hr />
-          <form action="/produk/add" method="POST">
-            <div class="mb-3">
+          <form action="/produk/edit" method="POST">
+            <input type="hidden" name="id" value="{{.produk.Id}}" />
+             <div class="mb-3">
               <label class="form-label">Name</label>
-              <input type="text" class="form-control" name="name" autocomplete="off" value="{{.produk.Name}}" disabled />
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Category</label>
-              <input type="text" class="form-control" name="category" autocomplete="off" value="{{.produk.Category.Name}}" disabled />
-            </div>
+              <input type="text" class="form-control" name="name" autocomplete="off" value="{{.produk.Name}}" />
+            <div class="mb3">
+                <label class="form-label">Category </label>
+                <select class="form-select" name="category_id">
+                {{range .categories}}
+                <option value="{{.Id}}">{{.Name}}</option>
+                {{ end}}
+            </select>
+            </div>  
             <div class="mb-3">
               <label class="form-label">Stock</label>
-              <input type="number" class="form-control" name="stock" autocomplete="off" value="{{.produk.Stok}}" disabled />
+              <input type="number" class="form-control" name="stock" autocomplete="off" value="{{.produk.Stok}}" />
             </div>
             <div class="mb-3">
               <label class="form-label">Description</label>
-              <textarea class="form-control" name="description" rows="3" disabled>{{.produk.Keterangan}}</textarea>
+              <textarea class="form-control" name="description" rows="3" >{{.produk.Keterangan}}</textarea>
             </div>
             <div class="float-end">
               <a href="/produk" class="btn btn-secondary">Back</a>
+              <button type="submit" class="btn btn-primary">Save</button>
             </div>
           </form>
         </div>
